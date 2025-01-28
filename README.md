@@ -30,7 +30,7 @@ FROM
 WHERE
     lpep_pickup_datetime >= '2019-10-01'
     AND lpep_pickup_datetime < '2019-11-01';
-    ```
+```
 
 ### Answer: 104,802; 198,924; 109,603; 27,678; 35,189
 
@@ -45,7 +45,7 @@ SELECT
     trip_distance = (
         SELECT MAX(trip_distance)
         FROM green_tripdata_2019_10 );
-        ```
+```
 
 ### Answer: 2019-10-31
 
