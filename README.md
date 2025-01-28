@@ -18,7 +18,8 @@ The mapped port for Postgres is 5433 (host) to 5432 (container).
 
 ## Question 3: Trip Segmentation Count
 Query:
-`SELECT
+```
+SELECT
     SUM(CASE WHEN trip_distance <= 1 THEN 1 ELSE 0 END) AS "Up to 1 mile",
     SUM(CASE WHEN trip_distance > 1 AND trip_distance <= 3 THEN 1 ELSE 0 END) AS "1 to 3 miles",
     SUM(CASE WHEN trip_distance > 3 AND trip_distance <= 7 THEN 1 ELSE 0 END) AS "3 to 7 miles",
@@ -28,26 +29,30 @@ FROM
     green_tripdata_2019_10
 WHERE
     lpep_pickup_datetime >= '2019-10-01'
-    AND lpep_pickup_datetime < '2019-11-01';`
+    AND lpep_pickup_datetime < '2019-11-01';
+```
 
 ### Answer: 104,802; 198,924; 109,603; 27,678; 35,189
 
 ## Question 4: Longest trip for each day
 Query:
-`SELECT
+```
+SELECT
     DATE(lpep_pickup_datetime)
  FROM
     green_tripdata_2019_10
  WHERE
     trip_distance = (
         SELECT MAX(trip_distance)
-        FROM green_tripdata_2019_10 );`
+        FROM green_tripdata_2019_10 );
+```
 
 ### Answer: 2019-10-31
 
 ## Question 5: Three biggest pickup zones
 Query:
-`WITH biggest_pickup_loc_id AS (
+```
+WITH biggest_pickup_loc_id AS (
     SELECT "PULocationID"
     FROM green_tripdata_2019_10
     WHERE DATE(lpep_pickup_datetime) = '2019-10-18'
@@ -56,13 +61,15 @@ Query:
 )
 SELECT "Zone"
 FROM taxi_zone_lookup
-WHERE "LocationID" IN (SELECT * FROM biggest_pickup_loc_id);`
+WHERE "LocationID" IN (SELECT * FROM biggest_pickup_loc_id);
+```
 
 ### Answer: East Harlem North, East Harlem South, Morningside Heights
 
 ## Question 6: Largest tip
 Query:
-`SELECT
+```
+SELECT
     zn_do."Zone"
 FROM
     green_tripdata_2019_10 AS tr
@@ -73,7 +80,8 @@ FROM
 WHERE DATE_TRUNC('MONTH', tr.lpep_pickup_datetime) = '2019-10-01'
   AND zn_pu."Zone" = 'East Harlem North'
 ORDER BY tr.tip_amount DESC
-LIMIT 1;`
+LIMIT 1;
+```
 
 ### Answer: JFK Airport
 
