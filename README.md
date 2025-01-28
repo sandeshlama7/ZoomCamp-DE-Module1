@@ -18,7 +18,8 @@ The mapped port for Postgres is 5433 (host) to 5432 (container).
 
 ## Question 3: Trip Segmentation Count
 Query:
-`SELECT
+`
+SELECT
     SUM(CASE WHEN trip_distance <= 1 THEN 1 ELSE 0 END) AS "Up to 1 mile",
     SUM(CASE WHEN trip_distance > 1 AND trip_distance <= 3 THEN 1 ELSE 0 END) AS "1 to 3 miles",
     SUM(CASE WHEN trip_distance > 3 AND trip_distance <= 7 THEN 1 ELSE 0 END) AS "3 to 7 miles",
@@ -28,7 +29,8 @@ FROM
     green_tripdata_2019_10
 WHERE
     lpep_pickup_datetime >= '2019-10-01'
-    AND lpep_pickup_datetime < '2019-11-01';`
+    AND lpep_pickup_datetime < '2019-11-01';
+    `
 
 ### Answer: 104,802; 198,924; 109,603; 27,678; 35,189
 
